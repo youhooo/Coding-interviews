@@ -1,0 +1,34 @@
+请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+输入：
+每个输入文件仅包含一组测试样例。
+对于每组测试案例，输入一行代表要处理的字符串。
+输出：
+对应每个测试案例，出经过处理后的字符串。
+样例输入：
+We Are Happy
+样例输出：
+We%20Are%20Happy
+ */
+public class Offer04 {
+	public static void main(String[] args){
+	     Scanner scanner = new Scanner(System.in);
+	     String string=scanner.nextLine(); 
+	     string=string.replaceAll(" ","%20");
+	     System.out.println(string);
+	     }
+	}
+//public String replaceBlank(String input){
+//		if(input==null)
+//			return null;
+//		StringBuffer outputBuffer=new StringBuffer();
+//		for(int i=0;i<input.length();i++){
+//			if(input.charAt(i)==' '){
+//				outputBuffer.append("%");
+//				outputBuffer.append("2");
+//				outputBuffer.append("0");
+//			}else {
+//				outputBuffer.append(String.valueOf(input.charAt(i)));
+//			}
+//		}
+//		return new String(outputBuffer);
+//	}
