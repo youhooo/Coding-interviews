@@ -1,0 +1,88 @@
+用两个栈来实现一个队列，完成队列的Push和Pop操作。
+队列中的元素为int类型。
+输入：
+每个输入文件包含一个测试样例。
+对于每个测试样例，第一行输入一个n(1<=n<=100000)，代表队列操作的个数。
+接下来的n行，每行输入一个队列操作：
+1.	PUSH X 向队列中push一个整数x(x>=0)
+2.	POP 从队列中pop一个数。
+输出：
+对应每个测试案例，打印所有pop操作中从队列pop中的数字。如果执行pop操作时，队列为空，则打印-1。
+样例输入：
+3
+PUSH 10
+POP
+POP
+样例输出：
+10
+-1
+ */
+public class Offer07 {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		Stack<Integer> s1=new Stack<Integer>();
+		Stack<Integer> s2=new Stack<Integer>();
+		while(sc.hasNext()){
+			int n=sc.nextInt();
+			for(int i=0;i<n;i++){
+				String s=sc.next();
+				if(s.equals("PUSH")){
+					int m=sc.nextInt();
+					s1.push(m);
+				}
+				if(s.equals("POP")){
+                    if(!s2.isEmpty()){
+                        System.out.println(s2.peek());
+                        s2.pop();
+                    }else if(s2.isEmpty() && !s1.isEmpty()){
+                        while(!s1.isEmpty()){
+                            s2.push(s1.peek());
+                            s1.pop();
+                        }
+                        System.out.println(s2.peek());
+                        s2.pop();
+                    }else if(s2.isEmpty() && s1.isEmpty()){
+                        System.out.println(-1);
+                    }
+                }
+			}
+		}
+	}
+}
+//class StackByLink{
+//	public Node front;
+//	public Node rear;
+//	public boolean isEmpty(){
+//		return front==null;
+//	}
+//	public void push(int data){
+//		Node newNode=new Node(data);
+//		if(this.isEmpty()){
+//			newNode=front;
+//			newNode=rear;
+//		}else{
+//			rear.next=newNode;
+//			rear=newNode;			
+//		}
+//	}
+//	public void pop(){
+//		Node newNode;
+//		if(this.isEmpty()){
+//			System.out.print("堆栈为空");
+//			return;
+//		}
+//		newNode=front;
+//		if(newNode==rear){
+//			front=null;
+//			rear=null;
+//			System.out.println("堆栈为空");
+//		}else{
+//			while(newNode.next!=rear){
+//				newNode=newNode.next;
+//			}
+//			newNode.next=null;
+//			rear=newNode;
+//		}
+//		
+//	}
+//}
