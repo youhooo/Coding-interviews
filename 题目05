@@ -1,0 +1,80 @@
+输入一个链表，从尾到头打印链表每个节点的值。
+输入：
+每个输入文件仅包含一组测试样例。
+每一组测试案例包含多行，每行一个大于0的整数，代表一个链表的节点。第一行是链表第一个节点的值，依次类推。当输入到-1时代表链表输入完毕。-1本身不属于链表。
+输出：
+对应每个测试案例，以从尾到头的顺序输出链表每个节点的值，每个值占一行。
+样例输入：
+1
+2
+3
+4
+5
+-1
+样例输出：
+5
+4
+3
+2
+1
+*/
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+
+public class Offer05 { 
+	public static void main(String[] args) throws IOException {
+		StreamTokenizer token=new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));		
+		LinkList list=new LinkList();
+		while (token.nextToken()!=StreamTokenizer.TT_EOF && token.nval != -1){		
+		
+			token.nextToken();
+			int n=(int)token.nval;
+			if(n!=-1) list.insert(n);	
+			else break;
+	}	
+		list.reverse();
+}
+class Node1{
+	int data;
+	Node1 next;
+	public Node1(int data){
+		this.data=data;
+		this.next=null;
+	}
+}
+class LinkList1{
+	Node1 first;
+	Node1 last;
+	public boolean isEmpty(){
+		return first==null;
+	}
+	public void insert(int data){
+		Node1 newNode=new Node1(data);
+		if(isEmpty()){
+			first=newNode;
+			last=newNode;
+		}else{
+			last.next=newNode;
+			last=newNode;
+		}		
+	}
+	public void reverse(){
+		Node1 current=first;
+		Node1 before=null;
+		while(current!=null){
+			last=before;
+			before=current;
+			current=current.next;
+			before.next=last;
+		}		
+		current=before;
+		while(current!=null){
+			System.out.println(current.data);
+			current=current.next;
+		}
+		System.out.println();
+		}
+	}
+}
