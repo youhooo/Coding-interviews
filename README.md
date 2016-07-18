@@ -1,0 +1,69 @@
+# Coding-interviews
+/*
+ * 题目08描述：
+把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
+输入：
+输入可能包含多个测试样例，对于每个测试案例，
+输入的第一行为一个整数n(1<= n<=1000000)：代表旋转数组的元素个数。
+输入的第二行包括n个整数，其中每个整数a的范围是(1<=a<=10000000)。
+输出：
+对应每个测试案例，
+输出旋转数组中最小的元素。
+样例输入：
+5
+3 4 5 1 2
+样例输出：
+1
+*/
+public class Offer08 {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int [] s=new int[n];
+		while(sc.hasNext()){
+			for(int i=0;i<n;i++){
+				int m=sc.nextInt();
+				s[i]=m;
+			}
+			  int k=minMumb(s);
+	            if(k!=-1)
+	                System.out.println(s[k]);
+		}		
+	}
+	
+	public static int minMumb(int array[]){
+        if(array==null||array.length==0)
+            return -1;
+        int low=0;
+        int hig=array.length-1;
+        int mid=low;
+        while(array[low]>=array[hig]){
+            if(hig-low==1){
+                mid=hig;
+                break;
+            }
+            mid=(low+hig)/2;
+            if(array[mid]==array[low]&&array[mid]==array[hig]){
+                return findMin(array);
+            }
+            if(array[mid]>array[low])
+                low=mid;
+            else if(array[mid]<=array[hig])
+                hig=mid;
+        }
+        return mid;
+    }
+	
+    public static int findMin(int array[]){
+        if(array==null||array.length==0)
+            return -1;
+        int n=array.length;
+        int i=0;
+        for(i=1;i<n;i++)
+            if(array[i]<array[i-1])
+                return i;
+        if(i==n)
+            return 0;   
+        return -1;
+	}
+}    
