@@ -1,0 +1,48 @@
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+输入：
+输入可能包含多个测试样例。
+对于每个输入文件，第一行输入一个整数T，表示测试案例的数目，接下来的T行每行输入一个浮点数base和一个整数exponent，两个数中间用一个空格隔开。
+输出：
+对应每个测试案例，
+输出一个浮点数代表答案，保留两位小数即可。
+样例输入：
+5
+1.0 10
+0.0 -5
+1.0 0
+1.2 5
+2.0 -1
+样例输出：
+1.00e+00f
+INF
+1.00e+00f
+2.49e+00f
+5.00e-01f*/
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+import java.text.DecimalFormat;
+
+public class Offer11 {	
+	public static void main(String[] args) throws IOException {
+		StreamTokenizer st = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
+        StringBuffer sb = new StringBuffer();
+        st.nextToken();
+        int n=(int)st.nval;
+        DecimalFormat df = new DecimalFormat("0.00E00f");
+        for(double a,b;n-->0;){
+            st.nextToken();
+            a=st.nval;
+            st.nextToken();
+            b=st.nval;
+            String str;
+            if(a==0&&b<0)str="INF";
+            else{
+                str=df.format(Math.pow(a,b));
+//                if(str.contains("E-")) str=str.replaceAll("E", "e");
+//                else str=str.replaceAll("E", "e+");
+            }sb.append(str+"\n");
+        }System.out.print(sb);
+    }
+}
